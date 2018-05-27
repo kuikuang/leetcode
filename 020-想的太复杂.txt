@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool isValid(string s) {
+      if(s.length() == 0)
+          return true;
+        
+        
+        stack<char> stack1;
+        
+        for(int i=0;i<s.length();i++){
+            char cur = s[i];
+            if(cur == '(' || cur == '{' || cur == '['){
+                stack1.push(cur);
+            }else{
+                switch(cur){
+                    case ')': 
+                        if(stack1.empty() || stack1.top() != '('){
+                            return false;
+                        } 
+                        else
+                             stack1.pop();
+                        break;
+                    case ']' : 
+                        if(stack1.empty() || stack1.top() != '['){
+                            return false;
+                        } 
+                         else
+                             stack1.pop();
+                        break;
+                    case '}' : 
+                        if(stack1.empty() || stack1.top() != '{'){
+                            return false;
+                        } 
+                         else
+                             stack1.pop();
+                        break;
+                    default :
+                        break;
+                }
+            }
+        }
+        
+        return stack1.size() == 0;
+    }
