@@ -1,0 +1,53 @@
+class Solution {
+public:
+    int search(vector<int> nums,int index,int target,int skip)
+    {
+        if(index>=nums.size())
+        return 0;
+        for(int i=index;i<nums.size();i++)
+        {
+            if(i==skip)
+                continue;
+            if(nums[i]==target)
+                return i;
+        }
+        return 0;
+    }
+    bool judge( vector<vector<int>> r,vector<int> temp)
+    {
+        if(r.size()==0)
+            return true;
+        sort(temp.begin(),temp.end());
+        for(int i=0;i<r.size();i++)
+        {
+            sort(r[i].begin(),r[i].end());
+            if(r[i]==temp)
+                return false;
+        }
+        return true;
+    }
+       vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> r;
+         vector<int> temp;
+        for(int i=0;i<nums.size();i++)
+        {
+            for(int j=i+1;j<nums.size();j++)
+            {
+                int a=0-(nums[i]+nums[j]);
+                if(search(nums,i+2,a,j))
+                {
+                   temp.push_back(nums[i]);
+                   temp.push_back(nums[j]);
+                   temp.push_back(nums[search(nums,i+2,a,j)]);
+                   if(judge(r,temp))
+                   { 
+                       r.push_back(temp);
+                   }
+                   temp.clear();
+                }
+            }
+        }
+           
+         return r;  
+    }
+};
