@@ -1,0 +1,27 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool judge(TreeNode* p,TreeNode* q)
+    {
+        if(!p&&!q)
+            return true;
+        if(!p||!q)
+            return false;
+        else
+        {
+            return judge(p->left,q->right)&&judge(p->right,q->left)&&p->val==q->val;
+        }
+    }
+    bool isSymmetric(TreeNode* root) {
+        TreeNode *temp=root;
+        return judge(temp,root);
+    }
+};
