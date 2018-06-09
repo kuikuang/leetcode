@@ -1,0 +1,19 @@
+class Solution {
+public:
+    double myPow(double x, int64_t n) {
+        if (x == 1) return 1;
+        if (n < 0) {
+            x = 1.0 / x;
+            n *= -1;
+        }
+        double ans = 1;
+        double temp = x;
+        while (n) {
+            if (n & 1) ans *= temp;
+            temp *= temp;
+            n >>= 1;
+        }
+        return ans;
+    }
+};
+//不用位运算就会超时 hhh 这个不用考虑溢出
