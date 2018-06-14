@@ -1,0 +1,20 @@
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int j;
+        for(int i=0;i<nums.size()-1;i++)
+        {
+            j=i+1;
+            while(nums[i]==0&&j<nums.size()&&nums[j]==0)
+            {
+               j++;
+            }
+            if(j==nums.size())
+                return;
+            if(nums[i]==0){
+            nums[i]=nums[j];
+            nums[j]=0;
+            }
+        }
+    }
+};//这题的最优算法应该是 你先把不是0的放到数组里，然后再往数组最后补0。虽然自己写的不是最优的算法，但总归是自己写的，hhhh
