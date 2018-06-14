@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        if(digits.size()==0)
+            return digits;
+        int carry=1;
+        vector<int>res(digits.size()+1);
+        for(int i=digits.size()-1;i>=0;i--)
+        {
+            int temp=digits[i]+carry;
+            digits[i]=(temp)%10;
+            carry=temp/10;
+            res[i+1]=digits[i];
+        }
+            if(carry==0)
+                return digits;
+        else{
+            res[0]=1;
+            return res;
+        }
+    }
+};//最快方法是如果最终最高位有进位，在数组后面push_back(1),然后交换第一个和最后。
