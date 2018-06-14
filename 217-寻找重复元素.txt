@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        multimap<int,int>temp;
+        for(int i=0;i<nums.size();i++)
+            temp.insert( multimap<int,int>::value_type(nums[i],i));
+        for(int i=0;i<nums.size();i++)
+        {
+            if(temp.count(nums[i])>1)
+                return true;
+        }
+        return false;
+    }
+};+//最简单的办法应该是先排序....然后直接比较相同否
