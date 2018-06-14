@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+                int temp;
+                int j=0; 
+                int size=nums.size();
+             if(size==1)
+                 return ;
+              if(k==size)
+                  return ;
+             if(k>size)
+               k=k%size;
+        for(int i=0;i<k;i++)
+        {
+            temp=nums[size-1];
+            for(int j=size-2;j>=0;j--)
+                nums[j+1]=nums[j];
+            nums[0]=temp;
+        }
+               
+    }
+};//此为第一种做法 每次右移一位
+//第二种做法为反转 将数组反转后 再反转0到k-1,k到length-1
