@@ -1,0 +1,59 @@
+class Solution {
+public:
+    bool find(int a,vector<int> b)
+    {
+        if(b.size()==0)
+            return false;
+        for(auto i:b)
+        {
+            if(a==i)
+                return true;
+        }
+        return false;
+    }
+    void zero1(vector<int>&a)
+    {
+        for(int i=0;i<a.size();i++)
+        {   
+            a[i]=0;
+
+        }
+    }
+    void zero2(vector<int>a,vector<vector<int>>&b)
+    {
+     
+        for(int i=0;i<a.size();i++)
+        {
+            for(int j=0;j<b.size();j++)
+            {
+                b[j][a[i]]=0;
+             
+            }
+        }
+    }
+    void setZeroes(vector<vector<int>>& matrix) {
+        if(matrix.size()==0)
+            return ;
+        vector<int>temp;
+        for(int i=0;i<matrix.size();i++)
+        {
+                 bool flag=false;
+            for(int j=0;j<matrix[i].size();j++)
+            {
+            
+                if(matrix[i][j]==0)
+                {  
+                    flag=true;
+                    temp.push_back(j);  
+                }
+                
+            }
+            if(flag)
+            {
+                zero1(matrix[i]);
+            } 
+        }
+        
+         zero2(temp,matrix);
+    }
+};//¿Õ¼ä¸´ÔÓ¶ÈÎªn£»
