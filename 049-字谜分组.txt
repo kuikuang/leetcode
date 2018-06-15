@@ -1,0 +1,81 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        vector<vector<string>> res;
+        if(strs.size()==0)
+            return res;
+        vector<vector<int>>record;
+        vector<string>temp=strs;
+        vector<int>temp1;
+        multimap<string,int>a;
+        multimap<string,int>::iterator it,com;
+        for(int i=0;i<temp.size();i++)
+        {
+            sort(temp[i].begin(),temp[i].end());
+            a.insert(multimap<string,int>::value_type(temp[i],i));
+        }
+
+        it=a.begin();
+        com=a.begin();
+        temp1.push_back(it->second);
+        it++;
+        while(it!=a.end())
+        {
+            if(it->first.compare(com->first)==0)
+            {
+                temp1.push_back(it->second);
+            }
+            else
+            {
+               record.push_back(temp1);
+                temp1.clear();
+                temp1.push_back(it->second);
+            }
+            com++;
+            it++;
+        }
+          record.push_back(temp1);
+         temp.clear();
+        for(int i=0;i<record.size();i++)
+        {
+            
+                for(int j=0;j<record[i].size();j++)
+                {
+                    temp.push_back(strs[record[i][j]]);
+                }
+            res.push_back(temp);
+            temp.clear();
+        }
+       
+   
+        return res;
+    }
+};
+/*记录一下最优用时的算法*/
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+  	unordered_map<string, int> dict;
+	vector<vector<string>> ans;
+
+	int index = 0;
+
+	for (int i = 0; i < strs.size(); ++i)
+	{
+		auto t = strs[i];
+		sort(t.begin(), t.end());
+
+		if (dict.find(t) == dict.end())
+		{
+			ans.push_back(vector<string>(1, strs[i]));
+			dict[t] = index++;
+		}
+		else
+		{
+			ans[dict[t]].push_back(strs[i]);
+		}
+	}
+
+	return ans;
+    }
+}//它也是先把每个字符串排序，然后map里找这个字符串，如果没找到，就在结果里新加一个vector<string>，然后把这个字符在map里对应的值设为在结果数组中的索引。
