@@ -1,0 +1,41 @@
+class Solution {
+public:
+    bool judge(vector<char>a)
+    {
+        int b=a.size();
+        for(int i=0;i<b/2;i++)
+        {
+            if(a[i]!=a[b-1-i])
+                return false;
+        }
+        return true;
+    }
+    string longestPalindrome(string s) {
+        vector<char>cur;
+        vector<char>res;
+        if(s.size()==1||s.size()==0)
+            return s;
+        for(int i=0;i<s.length();i++)
+          {
+            cur.push_back(s[i]);
+            bool flag=false;
+            for(int j=i+1;j<s.length();j++)
+            {
+                cur.push_back(s[j]);
+                if(s[j]==cur[0]&&judge(cur)&&cur.size()>res.size())   
+                {
+                 res.clear();
+                  res=cur;
+                }
+            }
+             cur.clear();
+            if(res.size()>=s.length()-i)
+                break;
+          }
+        string str="",temp="";
+        for(int i=0;i<res.size();i++)
+            str+=res[i];
+        temp+=s[0];
+        return str.size()==0?temp:str;
+    }
+};//我写的代码运行几百毫秒 神仙们的几毫秒。。。。
