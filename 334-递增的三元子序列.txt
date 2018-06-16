@@ -1,0 +1,41 @@
+class Solution {
+public:
+  
+    
+    bool increasingTriplet(vector<int>& nums) {
+        if(nums.size()<3)
+            return false;
+      
+        for(int i=0;i<nums.size();i++)
+        {
+            for(int j=i+1;j<nums.size();j++)
+            {
+                if(nums[j]>nums[i])
+                {
+                    for(int k=j+1;k<nums.size();k++)
+                    {
+                        if(nums[k]>nums[j])
+                            return true;
+                    }
+                }
+            }
+        }
+        return false;
+        
+    }
+};//渣渣的三重循环
+
+class Solution {
+public:
+    bool increasingTriplet(vector<int>& nums) {
+        int n = nums.size();
+		int c1 = INT_MAX , c2 = INT_MAX;
+		for(int i = 0;i < n;i++)
+		{
+			if(nums[i] <= c1)c1 = nums[i];
+			else if(nums[i] <= c2)c2 = nums[i];
+			else return true;
+		}
+		return false;
+    }
+};//大佬的一重循环  就是设立两个标准 c1 c2 如果比c1小 就把nums[i]设为c1 如果比c2小 就设为c2 如果比c1 c2 都大 就是正确的
