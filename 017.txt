@@ -1,0 +1,56 @@
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        vector<string>last;
+        if(digits=="")
+            return last;
+        queue<string>res;
+        cout<<"s";
+        map<int,string>mapping;
+        mapping.insert(pair<int,string>(2,"abc"));
+        mapping.insert(pair<int,string>(3,"def"));
+        mapping.insert(pair<int,string>(4,"ghi"));
+        mapping.insert(pair<int,string>(5,"jkl"));
+        mapping.insert(pair<int,string>(6,"mno"));
+        mapping.insert(pair<int,string>(7,"pqrs"));
+        mapping.insert(pair<int,string>(8,"tuv"));
+        mapping.insert(pair<int,string>(9,"wxyz"));
+        vector<int>digit;
+        for(int i=0;i<digits.length();i++)
+        {
+            digit.push_back(digits[i]-48);
+            cout<<digit[i];
+        }
+        
+        for(int i=0;i<mapping[digit[0]].length();i++)
+        {
+            string str="";
+            str+=mapping[digit[0]][i];
+            cout<<mapping[digit[0]][i];
+            res.push(str);
+        }
+        
+        for(int i=1;i<digit.size();i++)
+        {
+            int a=res.size();
+            for(int j=0;j<a;j++)
+            {
+                string temp=res.front();
+                for(int k=0;k<mapping[digit[i]].length();k++)
+                {
+                    res.push(temp+mapping[digit[i]][k]);
+                    
+                }
+                res.pop();
+            }
+        }
+        
+        while(!res.empty())
+        {
+            last.push_back(res.front());
+            res.pop();
+        }
+        return last;
+    }
+    
+};//写的有些麻烦 大体思路是对的
